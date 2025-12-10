@@ -1,11 +1,11 @@
 """
-Google Maps Scraper - Quick Start Example with 40+ Properties
-===============================================================
+Google Maps Scraper - Quick Start Example
+==========================================
 
 This is a simplified example showing the most important properties to extract.
 For the full 42-property version, see google_maps_scraper_advanced.py
 
-This version extracts the most commonly needed properties:
+This version extracts 20+ essential properties:
 - Name, Category, Address
 - Phone, Website, Email  
 - Rating, Reviews Count
@@ -40,13 +40,13 @@ def scrape_place(driver: Driver, link):
     def get_text(selector):
         try:
             return driver.text(selector)
-        except:
+        except Exception:
             return None
     
     def get_link(selector):
         try:
             return driver.link(selector)
-        except:
+        except Exception:
             return None
     
     # Extract basic information
@@ -166,7 +166,7 @@ def scrape_places_links(driver: Driver, query):
     # Accept Cookies for European users
     if driver.is_in_page("https://consent.google.com/"):
         driver.click('form:nth-child(2) > div > div > button')
-        driver.google_get(url)
+        driver.get(url)
     
     # Scroll to end of list
     end_reached = False

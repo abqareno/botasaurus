@@ -19,7 +19,6 @@ Usage:
 """
 
 from botasaurus.browser import browser, Driver
-from botasaurus.request import request, Request
 import urllib.parse
 import re
 import json
@@ -49,21 +48,21 @@ def scrape_place_details(driver: Driver, link):
         def safe_text(selector):
             try:
                 return driver.text(selector)
-            except:
+            except Exception:
                 return None
         
         # Helper function to safely extract link
         def safe_link(selector):
             try:
                 return driver.link(selector)
-            except:
+            except Exception:
                 return None
         
         # Helper function to safely get element
         def safe_element(selector):
             try:
                 return driver.get_element_or_none(selector)
-            except:
+            except Exception:
                 return None
         
         # 1. BASIC INFORMATION
@@ -149,7 +148,8 @@ def scrape_place_details(driver: Driver, link):
         if hours_button:
             try:
                 hours_button.click()
-                driver.sleep(1)  # Wait for panel to expand
+                # Wait for the hours panel to expand
+                driver.sleep(2)
                 # Extract hours from the expanded panel
                 hours_elements = driver.select_all("table.eK4R0e tr")
                 if hours_elements:
@@ -164,7 +164,7 @@ def scrape_place_details(driver: Driver, link):
                                 opening_hours[day] = hours
                 # Close the hours panel by clicking elsewhere
                 driver.click("body")
-            except:
+            except Exception:
                 pass
         
         # 6. PRICING
@@ -295,11 +295,24 @@ def scrape_place_details(driver: Driver, link):
                 if script_text:
                     try:
                         data = json.loads(script_text)
-                        if isinstance(data, dict) and '@type' in data:
-                            place_types.append(data['@type'])
-                    except:
+                        # Handle both single objects and arrays
+                        if isinstance(data, list):
+                            for item in data:
+                                if isinstance(item, dict) and '@type' in item:
+                                    place_type = item['@type']
+                                    if isinstance(place_type, list):
+                                        place_types.extend(place_type)
+                                    else:
+                                        place_types.append(place_type)
+                        elif isinstance(data, dict) and '@type' in data:
+                            place_type = data['@type']
+                            if isinstance(place_type, list):
+                                place_types.extend(place_type)
+                            else:
+                                place_types.append(place_type)
+                    except (json.JSONDecodeError, KeyError):
                         pass
-        except:
+        except Exception:
             pass
         
         # 18. TIMEZONE
@@ -410,7 +423,7 @@ def scrape_places_links(driver: Driver, query):
         if driver.is_in_page("https://consent.google.com/"):
             agree_button_selector = 'form:nth-child(2) > div > div > button'
             driver.click(agree_button_selector)
-            driver.google_get(url)
+            driver.get(url)
     
     # Scroll to the end of the places list to get all the places
     def scroll_to_end_of_places_list():
