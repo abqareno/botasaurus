@@ -257,18 +257,31 @@ def scrape_place_details(driver: Driver, link):
         
         # 14. SOCIAL MEDIA AND OTHER LINKS
         # Try to find social media links in the page
+        # Note: This is for data extraction/categorization, not security validation.
+        # The substring matching is used to identify social media platforms, not to
+        # validate or sanitize URLs for security purposes.
         social_links = {}
         page_links = driver.get_all_links("a")
         for link_url in page_links:
-            if link_url:
-                if 'facebook.com' in link_url:
-                    social_links['facebook'] = link_url
-                elif 'instagram.com' in link_url:
-                    social_links['instagram'] = link_url
-                elif 'twitter.com' in link_url or 'x.com' in link_url:
-                    social_links['twitter'] = link_url
-                elif 'linkedin.com' in link_url:
-                    social_links['linkedin'] = link_url
+            if link_url and link_url.startswith(('http://', 'https://')):
+                # Parse URL to extract domain for more precise matching
+                try:
+                    from urllib.parse import urlparse
+                    parsed = urlparse(link_url)
+                    domain = parsed.netloc.lower()
+                    
+                    # Match social media domains - this is for categorization only
+                    if 'facebook.com' in domain and not social_links.get('facebook'):
+                        social_links['facebook'] = link_url
+                    elif 'instagram.com' in domain and not social_links.get('instagram'):
+                        social_links['instagram'] = link_url
+                    elif ('twitter.com' in domain or 'x.com' == domain) and not social_links.get('twitter'):
+                        social_links['twitter'] = link_url
+                    elif 'linkedin.com' in domain and not social_links.get('linkedin'):
+                        social_links['linkedin'] = link_url
+                except Exception:
+                    # Skip malformed URLs
+                    pass
         
         # 15. REVIEW HIGHLIGHTS
         # Extract review snippets/highlights
