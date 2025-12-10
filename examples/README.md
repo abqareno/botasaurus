@@ -2,7 +2,9 @@
 
 This directory contains example scripts demonstrating various capabilities of Botasaurus.
 
-## Google Maps Scraper Examples
+## 🗺️ Google Maps Scraper Examples
+
+Need help choosing? See the [Comparison Guide](COMPARISON.md) to pick the right scraper for your needs.
 
 ### Quick Start Example (Recommended for Beginners)
 
