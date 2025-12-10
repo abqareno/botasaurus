@@ -435,7 +435,49 @@ We've developed an advanced, production-ready version of the scraper that's **4x
 
 :::
 
+## 📊 Extracting 40+ Properties from Google Maps
+
+The basic tutorial above shows you how to extract 6 essential properties (title, phone, website, reviews, rating, link). However, Google Maps contains much more valuable data for each place!
+
+If you need to extract comprehensive business intelligence data, we've created an **advanced example** that extracts **40+ properties** from each Google Maps place, including:
+
+- **Basic Info**: Title, category, description, place ID
+- **Contact Details**: Phone, website, email, social media links
+- **Location Data**: Address, coordinates, plus code, timezone
+- **Business Hours**: Full weekly schedule, business status
+- **Ratings**: Rating, review counts, review highlights
+- **Service Options**: Delivery, takeout, dine-in, reservations
+- **Accessibility**: Wheelchair accessible features
+- **Amenities**: Complete list of amenities and features
+- **Media**: Photo counts and availability
+- **Business Credibility**: Claimed status, verified badge, years in business
+- **Ordering Links**: Menu, online ordering, booking links
+- **And more!**
+
+### Using the Advanced Scraper
+
+You can find the advanced Google Maps scraper in the `examples` directory:
+
+```bash
+# Navigate to the examples directory
+cd examples
+
+# Run the advanced scraper
+python google_maps_scraper_advanced.py
+```
+
+This advanced scraper:
+- ✅ Extracts **42 comprehensive properties** per place
+- ✅ Uses parallel processing for faster scraping
+- ✅ Includes robust error handling
+- ✅ Outputs both JSON and CSV formats
+- ✅ Follows all Botasaurus best practices
+
+For detailed documentation on all extracted properties, see the [examples/README.md](../../examples/README.md) file.
+
 ## 🎉 What's Next?
 
 Congrats! You've built a powerful Google Maps scraper and mastered Botasaurus. Now, it's time to unleash your bot-building skills in the real world!
+
+To extract comprehensive business data with 40+ properties per place, use the advanced example in the `examples/google_maps_scraper_advanced.py` file!
 

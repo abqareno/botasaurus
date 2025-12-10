@@ -1486,6 +1486,8 @@ def scrape_google_maps(driver: Driver, link):
 scrape_google_maps("https://www.google.com/maps/search/web+developers+in+bangalore")
 ```
 
+**📌 Advanced Google Maps Scraping:** For comprehensive business data extraction, check out our advanced example that extracts **40+ properties** per place (including phone, website, hours, amenities, ratings, and much more). See [`examples/google_maps_scraper_advanced.py`](examples/google_maps_scraper_advanced.py) for the complete implementation.
+
 #### `run_async`
 
 Similarly, the `run_async` option allows you to execute scraping tasks asynchronously, enabling concurrent execution.
