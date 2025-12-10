@@ -149,18 +149,21 @@ def scrape_place_details(driver: Driver, link):
         if hours_button:
             try:
                 hours_button.click()
-                driver.short_wait()
+                driver.sleep(1)  # Wait for panel to expand
                 # Extract hours from the expanded panel
                 hours_elements = driver.select_all("table.eK4R0e tr")
                 if hours_elements:
                     opening_hours = {}
                     for row in hours_elements:
-                        day = safe_text("td:first-child", row)
-                        hours = safe_text("td:last-child", row)
-                        if day and hours:
-                            opening_hours[day] = hours
-                # Close the hours panel
-                driver.press(driver.esc)
+                        day_elem = row.select("td:first-child")
+                        hours_elem = row.select("td:last-child")
+                        if day_elem and hours_elem:
+                            day = day_elem.get_attribute("innerText")
+                            hours = hours_elem.get_attribute("innerText")
+                            if day and hours:
+                                opening_hours[day] = hours
+                # Close the hours panel by clicking elsewhere
+                driver.click("body")
             except:
                 pass
         

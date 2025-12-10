@@ -2,13 +2,40 @@
 
 This directory contains example scripts demonstrating various capabilities of Botasaurus.
 
-## Google Maps Scraper Advanced
+## Google Maps Scraper Examples
+
+### Quick Start Example (Recommended for Beginners)
+
+**File:** `google_maps_scraper_quick.py`
+
+A simplified, easy-to-understand Google Maps scraper that extracts **20+ essential properties** from each place.
+
+**Extracted Properties:**
+- Title, Category, Address
+- Latitude, Longitude, Place ID, Plus Code
+- Rating, Reviews Count
+- Phone, Website
+- Business Status, Hours Text
+- Price Level
+- Service Options (Delivery, Takeout, Dine-in)
+- Wheelchair Accessibility
+- Photos Count
+- Top 10 Amenities
+
+**Usage:**
+```bash
+python examples/google_maps_scraper_quick.py
+```
+
+### Advanced Example (40+ Properties)
 
 **File:** `google_maps_scraper_advanced.py`
 
-A comprehensive Google Maps scraper that extracts **40+ properties** from each place, including:
+A comprehensive Google Maps scraper that extracts **40+ properties** from each place.
 
-### Extracted Properties
+### Total: 42 Properties
+
+**Extracted Properties:**
 
 #### Basic Information (5 properties)
 - Title/Name
@@ -78,7 +105,7 @@ A comprehensive Google Maps scraper that extracts **40+ properties** from each p
 - Amenities count
 - Social media presence flag
 
-### Total: 42 Properties
+## Common Features (Both Examples)
 
 ### Usage
 
@@ -86,8 +113,11 @@ A comprehensive Google Maps scraper that extracts **40+ properties** from each p
 # Install Botasaurus if you haven't already
 pip install botasaurus
 
-# Run the scraper
-python google_maps_scraper_advanced.py
+# Run the quick start scraper (20+ properties)
+python examples/google_maps_scraper_quick.py
+
+# OR run the advanced scraper (42 properties)
+python examples/google_maps_scraper_advanced.py
 ```
 
 ### Features
