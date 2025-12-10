@@ -150,6 +150,8 @@ You can customize the scraper by:
 - The scraper follows best practices and uses Botasaurus's anti-detection features
 - Image blocking is enabled to reduce costs when using proxies
 
+For a complete reference of all 42 properties and their selectors, see [PROPERTIES_REFERENCE.md](PROPERTIES_REFERENCE.md).
+
 ### Requirements
 
 - Python 3.7+
